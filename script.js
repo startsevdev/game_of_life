@@ -1,6 +1,6 @@
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
-
+context.lineWidth = 0.5;
 context.strokeStyle = "#82b1ff";
 context.fillStyle = "#82b1ff";
 
@@ -30,11 +30,10 @@ function createArray(rows) { //creates a 2 dimensional array of required height
 };
 
 function randomGeneration() {
-  var total = 0;
   for (var i = 0; i < rows; i++) {
     for (var j = 0; j < rows; j++) {
-      var binary = getRandomInt(0, 100);
-      if (binary < 95) {
+      var random_int = getRandomInt(0, 100);
+      if (random_int < 50) {
         grid[i][j] = 0;
       } else {
         grid[i][j] = 1;
@@ -83,8 +82,6 @@ function updateGeneration() {
       } else if (grid[i][j] === 1) {
         switch (totalCells) {
           case 2:
-            newGrid[i][j] = 1;
-            break;
           case 3:
             newGrid[i][j] = 1;
             break;
@@ -94,7 +91,11 @@ function updateGeneration() {
       }
     }
   }
-  grid = newGrid;
+  for (var i = 0; i < rows; i++) {
+    for (var j = 0; j < rows; j++) {
+      grid[i][j] = newGrid[i][j]
+    }
+  }
 }
 
 function gameLoop() {
@@ -103,7 +104,7 @@ function gameLoop() {
 }
 
 
-var rows = 100;
+var rows = 60;
 var grid = createArray(rows);
 var newGrid = createArray(rows);
 
