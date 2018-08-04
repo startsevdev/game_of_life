@@ -1,8 +1,9 @@
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
-context.lineWidth = 0.5;
-context.strokeStyle = "#82b1ff";
-context.fillStyle = "#82b1ff";
+
+context.lineWidth = 0.25;
+context.strokeStyle = "#2196f3";
+context.fillStyle = "#80c6ff";
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -33,7 +34,7 @@ function randomGeneration() {
   for (var i = 0; i < rows; i++) {
     for (var j = 0; j < rows; j++) {
       var random_int = getRandomInt(0, 100);
-      if (random_int < 50) {
+      if (random_int > 25) {
         grid[i][j] = 0;
       } else {
         grid[i][j] = 1;
@@ -54,7 +55,7 @@ function drawGeneration() {
       }
     }
   }
-  //console.log(numberOfCells + " cells");
+  console.log(numberOfCells + " cells");
 }
 
 function updateGeneration() {
@@ -103,10 +104,9 @@ function gameLoop() {
   updateGeneration();
 }
 
-
-var rows = 60;
+var rows = 100;
 var grid = createArray(rows);
 var newGrid = createArray(rows);
-
 randomGeneration();
-setInterval(gameLoop, 100);
+
+setInterval(gameLoop, 50);
