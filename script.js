@@ -13,13 +13,13 @@ function drawGrid() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   for (var i = 0; i < rows; i++) {
     for (var j = 0; j < rows; j++) {
-      context.strokeRect(i * 600 / rows + 20, j * 600 / rows + 20, 600 / rows, 600 / rows);
+      context.strokeRect(i * 600 / rows, j * 600 / rows, 600 / rows, 600 / rows);
     }
   }
 };
 
 function drawCell(x, y) {
-  context.fillRect(x * 600 / rows + 20, y * 600 / rows + 20, 600 / rows, 600 / rows);
+  context.fillRect(x * 600 / rows, y * 600 / rows, 600 / rows, 600 / rows);
 };
 
 function createArray(rows) { //creates a 2 dimensional array of required height
@@ -59,18 +59,44 @@ function drawGeneration() {
 }
 
 function updateGeneration() {
-  for (var i = 1; i < rows - 1; i++) {
-    for (var j = 1; j < rows - 1; j++) {
+  for (var i = 0; i < rows; i++) {
+    for (var j = 0; j < rows; j++) {
+
       var totalCells = 0;
-      //console.log(grid[0]);
-      totalCells += grid[i-1][j-1];
-      totalCells += grid[i][j-1];
-      totalCells += grid[i+1][j-1];
-      totalCells += grid[i+1][j];
-      totalCells += grid[i+1][j+1];
-      totalCells += grid[i][j+1];
-      totalCells += grid[i-1][j+1];
-      totalCells += grid[i-1][j];
+      var ambient_cells = []
+
+      try {
+        ambient_cells.push(grid[i-1][j-1]);
+      } catch (err) {}
+      try {
+        ambient_cells.push(grid[i][j-1]);
+      } catch (err) {}
+      try {
+        ambient_cells.push(grid[i+1][j-1]);
+      } catch (err) {}
+      try {
+        ambient_cells.push(grid[i+1][j]);
+      } catch (err) {}
+      try {
+        ambient_cells.push(grid[i+1][j+1]);
+      } catch (err) {}
+      try {
+        ambient_cells.push(grid[i][j+1]);
+      } catch (err) {}
+      try {
+        ambient_cells.push(grid[i-1][j+1]);
+      } catch (err) {}
+      try {
+        ambient_cells.push(grid[i-1][j]);
+      } catch (err) {}
+
+      //console.log(ambient_cells);
+
+      for (var x = 0; x < 8; x++) {
+        if (ambient_cells[x] === 1) {
+          totalCells += 1;
+        }
+      };
 
       if (grid[i][j] === 0) {
         switch (totalCells) {
@@ -107,6 +133,6 @@ function gameLoop() {
 var rows = 100;
 var grid = createArray(rows);
 var newGrid = createArray(rows);
-randomGeneration();
 
-setInterval(gameLoop, 50);
+randomGeneration();
+setInterval(gameLoop, 40);
