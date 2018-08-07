@@ -1,0 +1,17 @@
+#canvas {
+  margin: auto;
+  margin-top: 0px;
+  display: block;
+}
+
+h3, #counter {
+  margin-top: 5px;
+  float: left; /* Обтекание справа */
+  width: 50%; /* Ширина текстового блока */
+  margin-bottom: 15px;
+}
+
+#counter {
+  margin-top: 10px;
+  text-align: right;
+}
