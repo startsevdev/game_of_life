@@ -1,6 +1,6 @@
-var rows = 200;
+var rows = 150;
 var chance_of_birth = 25;
-var fps = 20;
+var fps = 50;
 
 
 var grid = createArray(rows);
@@ -156,11 +156,11 @@ function random_color() {
       break;
     case 2:
       document.body.style.background="#f2992e";
+      break;
     case 3:
      document.body.style.background="#36465d";
-    //default:
-    //  document.body.style.background="white";
-  }
+      break;
+    }
 }
 
 
