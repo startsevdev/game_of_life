@@ -1,19 +1,17 @@
-
-var rows = 100;
+var rows = 200;
 var chance_of_birth = 25;
-var fps = 100;
+var fps = 20;
 
 
 var grid = createArray(rows);
 var newGrid = createArray(rows);
 
-
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
 
-context.lineWidth = 0.25;
-context.strokeStyle = "#2196f3";
-context.fillStyle = "#80c6ff";
+context.lineWidth = 0.2;
+context.strokeStyle = "#ffffff";
+context.fillStyle = "#ffffff";
 
 
 function getRandomInt(min, max) {
@@ -42,9 +40,9 @@ function createArray(rows) { //creates a 2 dimensional array of required height
 };
 
 function drawGeneration() {
-  drawGrid();
-  //context.clearRect(0, 0, canvas.width, canvas.height);
-  context.strokeRect(0, 0, canvas.width, canvas.height);
+  //drawGrid();
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  //context.strokeRect(0, 0, canvas.width, canvas.height);
   var numberOfCells = 0;
   for (var i = 0; i < rows * 2; i++) {
     for (var j = 0; j < rows; j++) {
@@ -144,8 +142,27 @@ function gameLoop() {
 
 function main() {
   randomGeneration(rows, chance_of_birth);
-  setInterval(gameLoop, fps);
+  setInterval(gameLoop, 1000 / fps);
+}
+
+function random_color() {
+  var random_int = getRandomInt(0,4);
+  switch (random_int) {
+    case 0:
+      document.body.style.background="#56bc8a";
+      break;
+    case 1:
+      document.body.style.background="#a77dc2";
+      break;
+    case 2:
+      document.body.style.background="#f2992e";
+    case 3:
+     document.body.style.background="#36465d";
+    //default:
+    //  document.body.style.background="white";
+  }
 }
 
 
+random_color();
 main();
