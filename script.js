@@ -1,6 +1,6 @@
-var rows = 150;
+var rows = 60;
 var chance_of_birth = 25;
-var fps = 50;
+var fps = 25;
 
 
 var grid = createArray(rows);
@@ -40,8 +40,8 @@ function createArray(rows) { //creates a 2 dimensional array of required height
 };
 
 function drawGeneration() {
-  //drawGrid();
-  context.clearRect(0, 0, canvas.width, canvas.height);
+  drawGrid();
+  //context.clearRect(0, 0, canvas.width, canvas.height);
   //context.strokeRect(0, 0, canvas.width, canvas.height);
   var numberOfCells = 0;
   for (var i = 0; i < rows * 2; i++) {
@@ -161,6 +161,37 @@ function random_color() {
      document.body.style.background="#36465d";
       break;
     }
+}
+
+
+canvas.onclick = function (event) {
+  x = event.layerX;
+  y = event.layerY;
+
+  var i = Math.floor(x / canvas.width * rows * 2);
+  var j = Math.floor(y / canvas.height * rows);
+
+  grid[i][j] = 1;
+
+  drawGeneration();
+}
+
+canvas.onmousedown = function (event) {
+  canvas.onmousemove = function (event) {
+    x = event.layerX;
+    y = event.layerY;
+
+    var i = Math.floor(x / canvas.width * rows * 2);
+    var j = Math.floor(y / canvas.height * rows);
+
+    grid[i][j] = 1;
+
+    drawGeneration();
+  }
+}
+
+canvas.onmouseup = function(event) {
+  canvas.onmousemove =null;
 }
 
 
