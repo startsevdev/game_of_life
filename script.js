@@ -1,6 +1,6 @@
-var rows = 60;
+var rows = 100;
 var chance_of_birth = 25;
-var fps = 25;
+var fps = 20;
 
 
 var grid = createArray(rows);
